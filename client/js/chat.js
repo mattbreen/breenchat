@@ -10,7 +10,7 @@ ChatServer.prototype = {
     login: function(handle) {
         var me = this;
         this.handle = handle;
-        this.socket = new WebSocket('ws://localhost:8080/');
+        this.socket = new WebSocket('ws://sandbox.danbreen.net:8080/');
         this.socket.onopen = function () {
             me.log("Chat connection opened");
             me.send({'type': 'login', 'handle': handle});
