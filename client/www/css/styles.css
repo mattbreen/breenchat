@@ -1,0 +1,29 @@
+#chat-panel {
+	display: none;
+}
+
+#chatarea {
+	margin-top: 40px;
+	text-align: center;
+}
+
+#log {
+	height: 400px;
+	overflow-y: auto;
+}
+
+.aright {
+	text-align: right;
+}
+
+.time {
+	color: #999;
+}
+.user {
+	font-weight: bold;
+}
+
+.message-system {
+	font-weight: bold;
+	color: #900;
+}
