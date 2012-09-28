@@ -2,11 +2,11 @@
 <html>
 <head>
 <title>BreenChat</title>
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/styles.css?v.02" rel="stylesheet">
+<link href="/static/css/bootstrap.css" rel="stylesheet">
+<link href="/static/css/styles.css?v.02" rel="stylesheet">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/chat.js?v0.2"></script>
+<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/js/chat.js?v0.2"></script>
 </head>
 <body>
 
