@@ -1,4 +1,5 @@
-var ChatServer = function() {
+var ChatServer = function(endpoint) {
+    this.endpoint = endpoint;
     this.socket = undefined;
 };
 
@@ -10,7 +11,7 @@ ChatServer.prototype = {
     login: function(handle) {
         var me = this;
         this.handle = handle;
-        this.socket = new WebSocket('ws://sandbox.danbreen.net:8080/');
+        this.socket = new WebSocket('ws://'+this.endpoint+'/');
         this.socket.onopen = function () {
             me.log("Chat connection opened");
             me.send({'type': 'login', 'handle': handle});
@@ -78,8 +79,6 @@ ChatServer.prototype = {
         $('#log').scrollTop($('#log')[0].scrollHeight);
     }
 };
-
-window.chat = new ChatServer();
 
 $(function() {
 

@@ -1,0 +1,2 @@
+CHAT_SERVER = 'localhost'
+CHAR_PORT = 8080

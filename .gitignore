@@ -4,3 +4,4 @@
 /include/
 /lib/
 .Python
+client/config_local.py

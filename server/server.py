@@ -4,6 +4,7 @@ from txws import WebSocketFactory
 
 
 MESSAGE_TYPES = ('login', 'message')
+PORT = 8080
 
 
 class Chatter(protocol.Protocol):
@@ -94,7 +95,7 @@ class ChatterFactory(protocol.Factory):
 
 
 print "Starting reactor..."
-reactor.listenTCP(8080, WebSocketFactory(ChatterFactory()))
-print "Listening..."
+reactor.listenTCP(PORT, WebSocketFactory(ChatterFactory()))
+print "Listening on port %d..." % PORT
 reactor.run()
 

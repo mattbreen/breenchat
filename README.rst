@@ -31,6 +31,14 @@ To install the dependencies: ::
 
     pip install -r requirements.txt
 
+Configuration
+=============
+
+To configure: ::
+
+    cp chat/config_local.py.dist chat/config_local.py
+    ...edit config_local.py to change server/port if so desired...
+
 Running it locally
 ==================
 
@@ -41,7 +49,10 @@ Running the server: ::
 Running the client: ::
 
     cd client
-    ../bin/bottle.py chat
+    python chat.py
+
+To run the client in production, you can use `../bin/bottle.py chat`. Bottle
+is WSGI-ready, so you can hook it up to Apache or another WSGI interface.
 
 .. _WebSockets: http://en.wikipedia.org/wiki/WebSocket
 .. _Twisted: http://twistedmatrix.com/trac/

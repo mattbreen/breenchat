@@ -3,10 +3,10 @@
 <head>
 <title>BreenChat</title>
 <link href="/static/css/bootstrap.css" rel="stylesheet">
-<link href="/static/css/styles.css?v.02" rel="stylesheet">
+<link href="/static/css/styles.css" rel="stylesheet">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/js/chat.js?v0.2"></script>
+<script type="text/javascript" src="/static/js/chat.js"></script>
 </head>
 <body>
 
@@ -58,6 +58,9 @@
 
 </div>
 
+<script>
+window.chat = new ChatServer('{{endpoint}}');
+</script>
 </body>
 </html>
 
