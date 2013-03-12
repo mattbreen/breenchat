@@ -2,7 +2,7 @@
 BreenChat
 =========
 
-http://sandbox.danbreen.net
+http://chat.danbreen.net
 
 BreenChat is a simple, web-based chat server and client running on WebSockets_
 and Twisted_. It was created as a proof of concept just playing around with
@@ -36,8 +36,13 @@ Configuration
 
 To configure: ::
 
-    cp chat/config_local.py.dist chat/config_local.py
+    cp client/config_local.py.dist client/config_local.py
     ...edit config_local.py to change server/port if so desired...
+
+The server and port should point to the Twisted reactor running for the server, and that's what the client WebSocket will connect on. E.g.: ::
+
+    CHAT_SERVER = 'chat.danbreen.net'
+    CHAT_PORT = 8080
 
 Running it locally
 ==================
@@ -51,7 +56,7 @@ Running the client: ::
     cd client
     python chat.py
 
-To run the client in production, you can use `../bin/bottle.py chat`. Bottle
+To run the client in production, you can use `../bin/bottle.py -b localhost:8000 chat`. Bottle
 is WSGI-ready, so you can hook it up to Apache or another WSGI interface.
 
 .. _WebSockets: http://en.wikipedia.org/wiki/WebSocket
