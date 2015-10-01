@@ -16,4 +16,4 @@ def index():
     return template('index', endpoint=endpoint)
 
 if __name__ == "__main__":
-    run(host='localhost', port=8000, reloader=True)
+    run(host=config.CLIENT_HOST, port=config.CLIENT_PORT, reloader=True)
