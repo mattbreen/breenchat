@@ -1,4 +1,4 @@
-import simplejson
+import json
 from twisted.internet import protocol, reactor
 from txws import WebSocketFactory
 
