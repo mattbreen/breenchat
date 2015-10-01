@@ -19,7 +19,7 @@ class Chatter(protocol.Protocol):
         params.update({
             'type': type_,
         })
-        return simplejson.dumps(params)
+        return json.dumps(params)
 
     def _write(self, message):
         print "[%s,%d] OUT: %s" % (self.handle, self.id, message)
@@ -38,14 +38,14 @@ class Chatter(protocol.Protocol):
     def dataReceived(self, data):
         print "[%s,%d]  IN: %s" % (self.handle, self.id, data)
         try:
-            json = simplejson.loads(data)
+            json_data = json.loads(data)
         except ValueError:
             self.error('Invalid message sent')
             return
-        type_ = json.get('type')
+        type_ = json_data.get('type')
         if not type_ or type_ not in MESSAGE_TYPES:
             self.error('Invalid message type')
-        getattr(self, 'handle_%s' % type_)(json)
+        getattr(self, 'handle_%s' % type_)(json_data)
 
     def handle_message(self, params):
         self.broadcast('message', {
