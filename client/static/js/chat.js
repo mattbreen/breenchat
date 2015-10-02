@@ -13,7 +13,7 @@ ChatServer.prototype = {
         this.handle = handle;
         this.socket = new WebSocket('ws://'+this.endpoint+'/');
         this.socket.onopen = function () {
-            me.log("Chat connection opened");
+            me.log("This chat is fucking anonymous.");
             me.send({'type': 'login', 'handle': handle});
         };
         this.socket.onmessage = function(event) {
@@ -23,11 +23,11 @@ ChatServer.prototype = {
                     me.log(message.message, message.handle);
                     break;
                 case 'user_joined':
-                    me.log(message.handle + " has joined the channel");
+                    me.log(message.handle + " has joined the chat");
                     me.add_user(message.id, message.handle);
                     break;
                 case 'user_left':
-                    me.log(message.handle + " has left the channel");
+                    me.log(message.handle + " has left the chat");
                     me.remove_user(message.id);
                     break;
                 case 'userlist':
@@ -38,7 +38,7 @@ ChatServer.prototype = {
             }
         };
         this.socket.onclose = function () {
-            me.log("Chat connection closed");
+            me.log("Chat session closed");
         };
     },
 
