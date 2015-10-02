@@ -1,4 +1,5 @@
 import json
+import sys
 from twisted.internet import protocol, reactor
 from txws import WebSocketFactory
 
@@ -21,8 +22,12 @@ class Chatter(protocol.Protocol):
         })
         return json.dumps(params)
 
+    def _print(self, message):
+        print message.encode('ascii', 'ignore')
+        sys.stdout.flush()
+
     def _write(self, message):
-        print "[%s,%d] OUT: %s" % (self.handle, self.id, message)
+        self._print(u"[%s,%d] OUT: %s" % (self.handle, self.id, message))
         self.transport.write(message)
 
     def reply(self, type_, params):
@@ -32,11 +37,11 @@ class Chatter(protocol.Protocol):
         self.factory.broadcast(self._build(type_, params))
 
     def error(self, message):
-        print "ERROR: %s" % message
+        self._print(u"ERROR: %s" % message)
         self.reply('error', {'message': message})
 
     def dataReceived(self, data):
-        print "[%s,%d]  IN: %s" % (self.handle, self.id, data)
+        self._print(u"[%s,%d]  IN: %s" % (self.handle, self.id, data))
         try:
             json_data = json.loads(data)
         except ValueError:
