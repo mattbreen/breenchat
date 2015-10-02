@@ -23,11 +23,11 @@ ChatServer.prototype = {
                     me.log(message.message, message.handle);
                     break;
                 case 'user_joined':
-                    me.log(message.handle + " has joined the chat");
+                    me.log(message.handle + " has joined the chat.");
                     me.add_user(message.id, message.handle);
                     break;
                 case 'user_left':
-                    me.log(message.handle + " has left the chat");
+                    me.log(message.handle + " has left the chat.");
                     me.remove_user(message.id);
                     break;
                 case 'userlist':
@@ -38,7 +38,7 @@ ChatServer.prototype = {
             }
         };
         this.socket.onclose = function () {
-            me.log("Chat session closed");
+            me.log("Chat session closed.");
         };
     },
 

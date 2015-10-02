@@ -34,7 +34,7 @@
 
 #log {
     color: #3a87ad;
-    background-color: #d9edf7;
+    background-color: #F4FAFD;
     padding: 8px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     border: 1px solid #bce8f1;
@@ -44,9 +44,9 @@
 }
 
 #user-panel {
-    color: #c09853;
-    background-color: #fcf8e3;
-    border: 1px solid #fbeed5;
+    color: #485445;
+    background-color: #b3d2ad;
+    border: 2px dotted #485445;
     padding: 8px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     -webkit-border-radius: 4px;
