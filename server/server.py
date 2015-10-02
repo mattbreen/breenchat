@@ -4,7 +4,7 @@ from txws import WebSocketFactory
 
 
 MESSAGE_TYPES = ('login', 'message')
-PORT = 8080
+PORT = 8081
 
 
 class Chatter(protocol.Protocol):
