@@ -29,5 +29,6 @@ def deploy():
         run('git pull origin master')
         with virtualenv():
             run('pip install -r requirements.txt')
-        run('sudo supervisorctl restart breenchat')
+        run('sudo supervisorctl restart mattchat-server')
+        run('sudo supervisorctl restart mattchat-client')
 
