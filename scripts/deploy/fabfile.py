@@ -2,7 +2,7 @@ from contextlib import contextmanager as _contextmanager
 from fabric.api import cd, env, run, prefix, task
 
 
-env.user = 'ubuntu'
+env.user = 'matt'
 env.hosts = ['breenweb1']
 project_dir = '/home/matt/www/mattbreen.net/breenchat'
 env.activate = 'source {}/../bin/activate'.format(project_dir)
