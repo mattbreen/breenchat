@@ -7,6 +7,7 @@
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
+<script type="text/javascript" src="/static/js/jquery.titlealert.js"></script>
 </head>
 <body>
 

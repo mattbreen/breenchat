@@ -43,6 +43,28 @@
     border-radius: 4px;
 }
 
+#log .color1{/* Blue */
+    color: #0033cc;
+}
+#log .color2{/* Green */
+    color: #006600;
+}
+#log .color3{/* Red */
+    color: #cc0000;
+}
+#log .color4{/* Orange */
+    color: #ff9900;
+}
+#log .color5{/* Pink */
+    color: #cc00cc;
+}
+#log .color6{/* Purple */
+    color: #6600cc;
+}
+#log .color7{/* Yellow */
+    color: #ffff00;
+}
+
 #user-panel {
     color: #485445;
     background-color: #b3d2ad;

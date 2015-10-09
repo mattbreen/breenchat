@@ -20,7 +20,7 @@ ChatServer.prototype = {
             message = $.parseJSON(event.data);
             switch(message.type) {
                 case 'message':
-                    me.log(message.message, message.handle);
+                    me.log(message.message, message.handle, message.id);
                     break;
                 case 'user_joined':
                     me.log(message.handle + " has joined the chat.");
@@ -73,10 +73,16 @@ ChatServer.prototype = {
         return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
     },
 
-    log: function(msg, user) {
+    log: function(msg, user, id) {
         var system = user == undefined;
-        $('#log').append('<div class="message'+(system ? ' message-system' : '')+'"><span class="time">'+this.timestamp()+'</span>: '+ (system ? '' : '<span class="user">'+user+':</span> ') +msg+'</div>');
+        $('#log').append('<div class="message'+(system ? ' message-system' : '')+'"><span class="time">'+this.timestamp()+'</span>: '+ (system ? '' : '<span class="user">'+user+':</span> ') + ('<span class="color' +(id%7)+ '">' +msg+ '</span>') +'</div>');
         $('#log').scrollTop($('#log')[0].scrollHeight);
+        $.titleAlert("New Message!", {
+            requireBlur:true,
+            stopOnFocus:true,
+            duration:0,
+            interval:500
+        });
     }
 };
 
