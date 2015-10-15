@@ -44,32 +44,43 @@
 }
 
 #log .color1{/* Blue */
-    color: #0033cc;
+    color: #001F7D;
 }
 #log .color2{/* Green */
-    color: #006600;
+    color: #007D08;
 }
 #log .color3{/* Red */
-    color: #cc0000;
+    color: #7D0000;
 }
 #log .color4{/* Orange */
-    color: #ff9900;
+    color: #DC9600;
 }
 #log .color5{/* Pink */
-    color: #cc00cc;
+    color: #C70060;
 }
 #log .color6{/* Purple */
-    color: #6600cc;
+    color: #7D0079;
 }
 #log .color7{/* Yellow */
-    color: #ffff00;
+    color: #DAD700;
 }
 
 #user-panel {
     color: #485445;
     background-color: #b3d2ad;
-    border: 2px dotted #485445;
-    padding: 8px;
+    border: 2px solid #485445;
+    padding: 4px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+#power-panel {
+    color: #485445;
+    background-color: #FDF3F3;
+    border: 2px solid #FD5B5B;
+    padding: 4px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;

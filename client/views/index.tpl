@@ -34,30 +34,33 @@
                 </form>
     		</div>
             <div id="user-panel" class="span3">
-                <h4>Users (<span id="usercount"></span>)</h4>
-                <ul id="userlist" class="unstyled"></ul>
+                <h4><i class="icon-user"></i> Users (<span id="usercount"></span>)</h4>
+                <ul id="userlist" class="styled"></ul>
             </div>
+            <br><br>
+            <!-- <div id="power-panel" class="span3">
+                <h4>Functions</h4>
+                <button class="btn btn-info" id="cats">Cat in the Wall</button>
+            </div> -->
+            
         </div>
-
 	</div>
 
-	<div class="modal hide fade" id="handle-dlg">
+	<div class="modal hide fade" id="handle-dlg" data-backdrop="static" data-keyboard="false">
 		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			<h3>Log In</h3>
 		</div>
 		<div class="modal-body">
-			<form class="form-inline" id="handle-form">
 				<div class="form-group">
+				<div class="alert alert-danger hide" role="alert" id="password-error">Incorrect password.</div>
 				<label>Name:</label>
 				<input type="text" class="span4" id="handle" placeholder="Your Name"><p><p>
 				<label>Password:</label>
-				<input type="password" class-"form-control" id="loginPassword" placeholder="Password" required="">
+				<input type="password" class="span4" id="loginPassword" placeholder="Password">
 				</div>
-			</form>
 		</div>
 		<div class="modal-footer">
-		<a href="#" class="btn btn-primary" data-dismiss="modal">Send It</a>
+		<a href="#" class="btn btn-primary" id="submit">Send It</a>
 		</div>
 	</div>
 

@@ -69,15 +69,17 @@ ChatServer.prototype = {
         var date = new Date(),
             hrs = date.getHours(),
             mins = date.getMinutes(),
-            secs = date.getSeconds();
-        return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+            ampm = hrs >= 12 ? 'pm' : 'am';
+        hrs = hrs % 12;
+        hrs = hrs ? hrs : 12;
+        return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ampm;
     },
 
     log: function(msg, user, id) {
         var system = user == undefined;
-        $('#log').append('<div class="message'+(system ? ' message-system' : '')+'"><span class="time">'+this.timestamp()+'</span>: '+ (system ? '' : '<span class="user">'+user+':</span> ') + ('<span class="color' +(id%7)+ '">' +msg+ '</span>') +'</div>');
+        $('#log').append('<div class="message'+(system ? ' message-system' : '')+'"><span class="time">'+this.timestamp()+'</span>: '+ ('<span class="color' +(id%7)+ '">' + (system ? '' : '<span class="user">'+user+':</span> ') +msg+ '</span>') +'</div>');
         $('#log').scrollTop($('#log')[0].scrollHeight);
-        $.titleAlert("New Message!", {
+        $.titleAlert(system ? "A New Guy!" : (user + " said something"), {
             requireBlur:true,
             stopOnFocus:true,
             duration:0,
@@ -90,9 +92,15 @@ $(function() {
 
 	$('#handle-dlg').modal('show')
 		.on('shown', function() {
+            $('#handle-dlg').modal({backdrop: 'static', keyboard: false});
 			$('#handle').focus();
-			$('#handle-form').submit(function() {
-				$('#handle-dlg').modal('hide');
+			$('#submit').click(function() {
+                if($('#loginPassword').val() == "catinthewall94"){
+                    $('#handle-dlg').modal('hide');
+                }else{
+                    $('#password-error').show();
+                    $('#loginPassword').focus();
+                }
 				return false;
 			});
 		})
@@ -109,5 +117,10 @@ $(function() {
 	    $('#chat').val('');
 	    return false;
 	});
+
+    $('#cats').submit(function() {
+        window.chat.message("Cat in the Wall");
+        return false;
+    });
 
 });
