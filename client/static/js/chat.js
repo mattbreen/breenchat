@@ -1,6 +1,8 @@
 var ChatServer = function(endpoint) {
     this.endpoint = endpoint;
     this.socket = undefined;
+
+    this.color_count = 5;
 };
 
 ChatServer.prototype = {
@@ -13,7 +15,7 @@ ChatServer.prototype = {
         this.handle = handle;
         this.socket = new WebSocket('ws://'+this.endpoint+'/');
         this.socket.onopen = function () {
-            me.log("This chat is fucking anonymous.");
+            me.log("This chat is fucking anonymous");
             me.send({'type': 'login', 'handle': handle});
         };
         this.socket.onmessage = function(event) {
@@ -23,11 +25,11 @@ ChatServer.prototype = {
                     me.log(message.message, message.handle, message.id);
                     break;
                 case 'user_joined':
-                    me.log(message.handle + " has joined the chat.");
+                    me.log(message.handle + " has joined the chat");
                     me.add_user(message.id, message.handle);
                     break;
                 case 'user_left':
-                    me.log(message.handle + " has left the chat.");
+                    me.log(message.handle + " has left the chat");
                     me.remove_user(message.id);
                     break;
                 case 'userlist':
@@ -38,12 +40,20 @@ ChatServer.prototype = {
             }
         };
         this.socket.onclose = function () {
-            me.log("Chat session closed.");
+            me.log("Chat connection closed");
         };
     },
 
     add_user: function(id, handle) {
-        var $el = $('<li id="user-'+id+'">'+handle+'</li>').hide();
+        var color_id = id % this.color_count,
+            $el = $('<li id="user-'+id+'" class="list-group-item user-color-'+color_id+'">'+handle+'</li>').hide();
+        $('#userlist').append($el);
+        $el.fadeIn(500, this.update_count);
+    },
+
+    rename_user: function(id, handle) {
+        var color_id = id % this.color_count,
+            $el = $('<li id="user-'+id+'" class="list-group-item user-color-'+color_id+'">'+handle+'</li>').hide();
         $('#userlist').append($el);
         $el.fadeIn(500, this.update_count);
     },
@@ -76,8 +86,24 @@ ChatServer.prototype = {
     },
 
     log: function(msg, user, id) {
-        var system = user == undefined;
-        $('#log').append('<div class="message'+(system ? ' message-system' : '')+'"><span class="time">'+this.timestamp()+'</span>: '+ ('<span class="color' +(id%7)+ '">' + (system ? '' : '<span class="user">'+user+':</span> ') +msg+ '</span>') +'</div>');
+        var system = user == undefined,
+            color_id = id % this.color_count,
+            $ts = $('<span class="time">').html(this.timestamp() + ': '),
+            $message = $('<div class="message">').append($ts),
+            $content = $('<span>');
+        if(system) {
+            $message.addClass('message-system');
+            $content.html(msg);
+        } else {
+            //eventually have text checking function to verify valid content
+            if(msg==""){
+                return false;
+            }
+            var $user = $('<span class="user">').html(user + ': ');
+            $content.addClass('user-color-'+color_id).append($user).append(msg);
+        }
+        $message.append($content);
+        $('#log').append($message);
         $('#log').scrollTop($('#log')[0].scrollHeight);
         $.titleAlert(system ? "A New Guy!" : (user + " said something"), {
             requireBlur:true,
@@ -91,11 +117,10 @@ ChatServer.prototype = {
 $(function() {
 
 	$('#handle-dlg').modal('show')
-		.on('shown', function() {
-            $('#handle-dlg').modal({backdrop: 'static', keyboard: false});
+		.on('shown.bs.modal', function() {
 			$('#handle').focus();
-			$('#submit').click(function() {
-                if($('#loginPassword').val() == "catinthewall94"){
+			$('#handle-form').submit(function() {
+                if($('#loginPassword').val() == "test"){
                     $('#handle-dlg').modal('hide');
                 }else{
                     $('#password-error').show();
@@ -104,7 +129,7 @@ $(function() {
 				return false;
 			});
 		})
-		.on('hide', function() {
+		.on('hide.bs.modal', function() {
 			var handle = $('#handle').val();
 			window.chat.login(handle);
 			$('#chat-panel').fadeIn();
@@ -118,8 +143,25 @@ $(function() {
 	    return false;
 	});
 
-    $('#cats').submit(function() {
-        window.chat.message("Cat in the Wall");
+    $('#change-name').click(function() {
+        $('#change-name-dlg').modal('show');
+        return false;
+    });
+
+    $('#cats').click(function() {
+        var date = new Date();
+        window.chat.message('<img src="http://thecatapi.com/api/images/get?format=src&type=gif&c=' + date.getSeconds() +'">');
+        return false;
+    });
+
+    $('#clear').click(function() {
+        $('#log .message').remove();
+        return false;
+    });
+
+    $('#new-name').submit(function() {
+        $('#chat').val('FUCK');
+        $('#change-name-dlg').modal('hide');
         return false;
     });
 
