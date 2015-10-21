@@ -101,7 +101,7 @@ ChatServer.prototype = {
             }
             //create hyperlinks
             console.log(msg);
-            if(msg.substring(0,4)=="http"){
+            if(msg.substring(0,4)=="http" || msg.substring(0,3)=="www"){
                 msg = "<a href=\"" + msg + "\" target=\"_blank\">" + msg + "</a>";
                 console.log(msg);
             }
