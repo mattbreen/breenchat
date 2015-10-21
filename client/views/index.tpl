@@ -61,7 +61,7 @@
                 		Functions <span id="usercount" class="badge"></span>
                 	</div>
                 	<ul class="list-group">
-                		<li class="list-group-item"><button width=30% class="btn btn-default" id="clear">Clear</button></li>
+                		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
                 	</ul>
             	</div>
@@ -70,23 +70,24 @@
 		</div>
 	</div>
 
-	<div class="modal fade bs-example-modal-sm" id="handle-dlg" role="dialog" data-backdrop="static" data-keyboard="false">
+	<div class="modal fade" id="handle-dlg" role="dialog" data-backdrop="static" data-keyboard="false">
 		<div class="modal-dialog" role="dialog">
 		<div class="modal-content">
-				<div class="modal-header">Log In</div>
 				<div class="modal-body">
 					<form id="handle-form">
 						<center>
-							<div class="alert alert-danger hide" role="alert" id="password-error"><strong>Incorrect password.</strong></div>
+							<div class="alert alert-danger" role="alert" id="password-error"><strong>Incorrect password.</strong></div>
 						<div class="input-group input-group-lg">
 							<input type="text" class="form-control" placeholder="Name" id="handle" autocomplete="off">
 						</div>
+						<br>
 						<div class="input-group input-group-lg">
 							<input type="password" class="form-control" placeholder="Password" id="loginPassword" autocomplete="off">
 						</div>
+						<br>
 						<div class="input-group">
 				<span class="input-group-btn">
-					<button class="btn btn-lg">Send It</button>
+					<button class="btn btn-primary btn-lg btn-block">Send It</button>
 				</span>
 						</div>
 					</center>

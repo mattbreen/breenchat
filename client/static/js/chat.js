@@ -99,6 +99,12 @@ ChatServer.prototype = {
             if(msg==""){
                 return false;
             }
+            //create hyperlinks
+            console.log(msg);
+            if(msg.substring(0,4)=="http"){
+                msg = "<a href=\"" + msg + "\" target=\"_blank\">" + msg + "</a>";
+                console.log(msg);
+            }
             var $user = $('<span class="user">').html(user + ': ');
             $content.addClass('user-color-'+color_id).append($user).append(msg);
         }
@@ -115,6 +121,7 @@ ChatServer.prototype = {
 };
 
 $(function() {
+    $('#password-error').hide();
 
 	$('#handle-dlg').modal('show')
 		.on('shown.bs.modal', function() {
@@ -150,12 +157,13 @@ $(function() {
 
     $('#cats').click(function() {
         var date = new Date();
-        window.chat.message('<img src="http://thecatapi.com/api/images/get?format=src&type=gif&c=' + date.getSeconds() +'">');
+        window.chat.message('<img src="http://thecatapi.com/api/images/get?format=src&type=gif&c=' + date.getSeconds() +'" height="200" width="200">');
         return false;
     });
 
     $('#clear').click(function() {
         $('#log .message').remove();
+        //chat.log(" has cleared their chat");
         return false;
     });
 
