@@ -10,9 +10,9 @@ ChatServer.prototype = {
         this.socket.send(JSON.stringify(params));
     },
 
-    login: function(handle) {
+    login: function(handle, avatar) {
         var me = this;
-        this.handle = handle;
+        //this.handle = handle;
         this.socket = new WebSocket('ws://'+this.endpoint+'/');
         this.socket.onopen = function () {
             me.log("This chat is fucking anonymous");
@@ -22,15 +22,21 @@ ChatServer.prototype = {
             message = $.parseJSON(event.data);
             switch(message.type) {
                 case 'message':
-                    me.log(message.message, message.handle, message.id);
+                    me.log(message.message, message.handle, message.avatar, message.id);
                     break;
                 case 'user_joined':
                     me.log(message.handle + " has joined the chat");
                     me.add_user(message.id, message.handle);
                     break;
+                case 'user_rename':
+                    me.log(message.handle + " now goes by " + message.handle);
+                    break;
                 case 'user_left':
                     me.log(message.handle + " has left the chat");
                     me.remove_user(message.id);
+                    break;
+                case 'clear':
+                    me.log(message.handle + " has cleared their chat... Suspicious.");
                     break;
                 case 'userlist':
                     $.each(message.users, function(idx, user) {
@@ -51,11 +57,8 @@ ChatServer.prototype = {
         $el.fadeIn(500, this.update_count);
     },
 
-    rename_user: function(id, handle) {
-        var color_id = id % this.color_count,
-            $el = $('<li id="user-'+id+'" class="list-group-item user-color-'+color_id+'">'+handle+'</li>').hide();
-        $('#userlist').append($el);
-        $el.fadeIn(500, this.update_count);
+    rename_user: function(handle) {
+        //TODO
     },
 
     remove_user: function(id) {
@@ -85,7 +88,7 @@ ChatServer.prototype = {
         return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ampm;
     },
 
-    log: function(msg, user, id) {
+    log: function(msg, user, avatar, id) {
         var system = user == undefined,
             color_id = id % this.color_count,
             $ts = $('<span class="time">').html(this.timestamp() + ': '),
@@ -111,6 +114,8 @@ ChatServer.prototype = {
         $message.append($content);
         $('#log').append($message);
         $('#log').scrollTop($('#log')[0].scrollHeight);
+
+        //Browser Tab Notifications
         $.titleAlert(system ? "A New Guy!" : (user + " said something"), {
             requireBlur:true,
             stopOnFocus:true,
@@ -127,7 +132,7 @@ $(function() {
 		.on('shown.bs.modal', function() {
 			$('#handle').focus();
 			$('#handle-form').submit(function() {
-                if($('#loginPassword').val() == "catinthewall94"){
+                if($('#loginPassword').val() == "test"){
                     $('#handle-dlg').modal('hide');
                 }else{
                     $('#password-error').show();
@@ -138,7 +143,8 @@ $(function() {
 		})
 		.on('hide.bs.modal', function() {
 			var handle = $('#handle').val();
-			window.chat.login(handle);
+            var avatar = $('#avatar').val();
+			window.chat.login(handle, avatar);
 			$('#chat-panel').fadeIn();
 			$('#chat').focus();
 			$('#my-handle').html(handle);
@@ -150,26 +156,32 @@ $(function() {
 	    return false;
 	});
 
-    $('#change-name').click(function() {
-        $('#change-name-dlg').modal('show');
-        return false;
-    });
-
     $('#cats').click(function() {
         var date = new Date();
         window.chat.message('<img src="http://thecatapi.com/api/images/get?format=src&type=gif&c=' + date.getSeconds() +'" height="200" width="200">');
         return false;
     });
 
-    $('#clear').click(function() {
-        $('#log .message').remove();
-        //chat.log(" has cleared their chat");
+    $('#goat').click(function() {
+        window.chat.message('<img src="http://ak-hdl.buzzfed.com/static/enhanced/webdr03/2013/9/5/10/anigif_enhanced-buzz-17427-1378391009-7.gif" height="200" width="200">');
         return false;
     });
 
-    $('#new-name').submit(function() {
-        $('#chat').val('FUCK');
+    $('#clear').click(function() {
+        $('#log .message').remove();
+        window.chat.send({'type': 'clear'});
+        return false;
+    });
+
+    $('#change-name').click(function() {
+        $('#change-name-dlg').modal('show');
+        return false;
+    });
+    $('#rename-form').submit(function() {
+        var newname = $('#new-name').val();
+        window.chat.rename_user(newname);
         $('#change-name-dlg').modal('hide');
+        $('#chat').focus();
         return false;
     });
 

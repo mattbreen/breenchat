@@ -4,7 +4,7 @@ from twisted.internet import protocol, reactor
 from txws import WebSocketFactory
 
 
-MESSAGE_TYPES = ('login', 'message')
+MESSAGE_TYPES = ('login', 'message', 'clear')
 PORT = 8081
 
 
@@ -13,6 +13,7 @@ class Chatter(protocol.Protocol):
         self.factory = factory
         self.id = id
         self.handle = 'unknown'
+        self.avatar = 'unknown'
 
     def _build(self, type_, params=None):
         if params is None:
@@ -55,6 +56,7 @@ class Chatter(protocol.Protocol):
     def handle_message(self, params):
         self.broadcast('message', {
             'handle': self.handle,
+            'avatar': self.avatar,
             'message': params['message'],
             'id': self.id,
         })
@@ -69,6 +71,17 @@ class Chatter(protocol.Protocol):
             ]
         })
         self.broadcast('user_joined', {
+            'handle': self.handle,
+            'id': self.id
+        })
+
+    def handle_clear(self, params):
+        self.broadcast('clear', {'handle':self.handle,})
+
+    def handle_rename(self, params):
+        self.handle = params['handle']
+
+        self.broadcast('user_rename', {
             'handle': self.handle,
             'id': self.id
         })

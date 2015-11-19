@@ -63,6 +63,7 @@
                 	<ul class="list-group">
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
+                		<li class="list-group-item"><button class="btn btn-default" id="goat">GOAT</button></li>
                 	</ul>
             	</div>
         	</div>
@@ -85,6 +86,10 @@
 							<input type="password" class="form-control" placeholder="Password" id="loginPassword" autocomplete="off">
 						</div>
 						<br>
+						<div class="input-group input-group-lg">
+							<input type="test" class="form-control" placeholder="Avatar URL" id="avatar" autocomplete="off">
+						</div>
+						<br>
 						<div class="input-group">
 				<span class="input-group-btn">
 					<button class="btn btn-primary btn-lg btn-block">Send It</button>
@@ -97,11 +102,15 @@
 		</div>
 	</div>
 
-	<div class="modal fade bs-example-modal-md" id="change-name-dlg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  		<div class="modal-dialog modal-md">
+	<div class="modal fade bs-example-modal-md" id="change-name-dlg" tabindex="-1" role="dialog">
+  		<div class="modal-dialog modal-md" role="dialog">
     	<div class="modal-content">
+    		<div class="modal-body">
+    		<form id="rename-form">
       		<div class="input-group input-group-lg">
 				<input type="text" class="form-control" placeholder="New Name" id="new-name" autocomplete="off">
+			</div>
+			</form>
 			</div>
     	</div>
   	</div>
