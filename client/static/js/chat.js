@@ -12,11 +12,10 @@ ChatServer.prototype = {
 
     login: function(handle, avatar) {
         var me = this;
-        //this.handle = handle;
         this.socket = new WebSocket('ws://'+this.endpoint+'/');
         this.socket.onopen = function () {
             me.log("This chat is fucking anonymous");
-            me.send({'type': 'login', 'handle': handle});
+            me.send({'type': 'login', 'handle': handle, 'avatar': avatar});
         };
         this.socket.onmessage = function(event) {
             message = $.parseJSON(event.data);
@@ -26,21 +25,21 @@ ChatServer.prototype = {
                     break;
                 case 'user_joined':
                     me.log(message.handle + " has joined the chat");
-                    me.add_user(message.id, message.handle);
+                    me.add_user(message.id, message.handle, message.avatar);
                     break;
-                case 'user_rename':
-                    me.log(message.handle + " now goes by " + message.handle);
+                case 'rename':
+                    me.log(message.handle + " changed their name.");
                     break;
                 case 'user_left':
                     me.log(message.handle + " has left the chat");
                     me.remove_user(message.id);
                     break;
                 case 'clear':
-                    me.log(message.handle + " has cleared their chat... Suspicious.");
+                    me.log(message.handle + " has cleared their chat. Suspicious.");
                     break;
                 case 'userlist':
                     $.each(message.users, function(idx, user) {
-                        me.add_user(user.id, user.handle);
+                        me.add_user(user.id, user.handle, user.avatar);
                     });
                     break;
             }
@@ -50,15 +49,12 @@ ChatServer.prototype = {
         };
     },
 
-    add_user: function(id, handle) {
+    add_user: function(id, handle, avatar) {
+        console.log(avatar)
         var color_id = id % this.color_count,
-            $el = $('<li id="user-'+id+'" class="list-group-item user-color-'+color_id+'">'+handle+'</li>').hide();
+            $el = $('<li id="user-'+id+'" class="list-group-item user-color-'+color_id+'">' + '<img src="'+ avatar +'" width=40 height=40 ">  ' + handle +'</li>').hide();
         $('#userlist').append($el);
         $el.fadeIn(500, this.update_count);
-    },
-
-    rename_user: function(handle) {
-        //TODO
     },
 
     remove_user: function(id) {
@@ -103,12 +99,12 @@ ChatServer.prototype = {
                 return false;
             }
             //create hyperlinks
-            console.log(msg);
             if(msg.substring(0,4)=="http" || msg.substring(0,3)=="www"){
                 msg = "<a href=\"" + msg + "\" target=\"_blank\">" + msg + "</a>";
                 console.log(msg);
             }
-            var $user = $('<span class="user">').html(user + ': ');
+            //var $user = $('<span class="user">').html(user + ': ');
+            var $user = $('<span class="user">').html('<img src="'+ avatar +'" width=40 height=40 ">  ');
             $content.addClass('user-color-'+color_id).append($user).append(msg);
         }
         $message.append($content);
@@ -130,10 +126,23 @@ $(function() {
 
 	$('#handle-dlg').modal('show')
 		.on('shown.bs.modal', function() {
+            if(!checkCookie()){
+                console.log("checkforst");
+                $('#handle').val(getCookie("username"));
+                $('#loginPassword').val(getCookie("password"));
+                $('#avatar').val(getCookie("avatar"));
+                $('#saveCheck').prop("true");
+            }
 			$('#handle').focus();
 			$('#handle-form').submit(function() {
                 if($('#loginPassword').val() == "test"){
                     $('#handle-dlg').modal('hide');
+                    if(checkCookie()){
+                        console.log("check");
+                        setCookie("username", $('#handle').val(), 30);
+                        setCookie("password", $('#loginPassword').val(), 30);
+                        setCookie("avatar", $('#avatar').val(), 30);
+                    }
                 }else{
                     $('#password-error').show();
                     $('#loginPassword').focus();
@@ -144,6 +153,10 @@ $(function() {
 		.on('hide.bs.modal', function() {
 			var handle = $('#handle').val();
             var avatar = $('#avatar').val();
+            //need better error checking on avatar eventually
+            if(avatar==""){
+                avatar = "/static/img/noavatar.png";
+            }
 			window.chat.login(handle, avatar);
 			$('#chat-panel').fadeIn();
 			$('#chat').focus();
@@ -167,6 +180,11 @@ $(function() {
         return false;
     });
 
+    $('#temp').click(function() {
+        window.chat.message('<p><font size="30">I\'m a faggot.</font>');
+        return false;
+    });
+
     $('#clear').click(function() {
         $('#log .message').remove();
         window.chat.send({'type': 'clear'});
@@ -179,10 +197,37 @@ $(function() {
     });
     $('#rename-form').submit(function() {
         var newname = $('#new-name').val();
-        window.chat.rename_user(newname);
+        window.chat.send({'type': 'rename'});
         $('#change-name-dlg').modal('hide');
         $('#chat').focus();
+        window.chat.message('<b><font size="16">I\'m a faggot.</font></b>');
         return false;
     });
 
 });
+
+function setCookie(cname, cvalue, exp){
+    console.log("sup");
+    var d = new Date();
+    d.setTime(d.getTime() + (exp*24*60*60*1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+function checkCookie(){
+    var user = getCookie("username");
+    if(user == ""){
+        return true;//No Cookie
+    }
+    return false;
+}

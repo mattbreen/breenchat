@@ -23,9 +23,10 @@
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="my-handle"></span><span class="caret"></span></a>
 			          <ul class="dropdown-menu">
 			            <li id="change-name"><a href="#">Change Name (soon)</a></li>
-			            <li><a href="#">Change Color (soon)</a></li>
+			            <li id="change-avatar"><a href="#">Change Avatar (soon)</a></li>
+			            <li id="change-color"><a href="#">Change Color (soon)</a></li>
 			            <li role="separator" class="divider"></li>
-			            <li><a href="javascript:window.open('','_self').close();">Leave Chat</a></li>
+			            <li><a href="javascript:history.go(0)">Log Out</a></li><!-- Need to confirm and clear cookies (eventually) -->
 			          </ul>
 			        </li>
 	  	</ul>
@@ -87,7 +88,11 @@
 						</div>
 						<br>
 						<div class="input-group input-group-lg">
-							<input type="test" class="form-control" placeholder="Avatar URL" id="avatar" autocomplete="off">
+							<input type="text" class="form-control" placeholder="Avatar URL" id="avatar" autocomplete="off">
+						</div>
+						<br>
+						<div class="input-group input-group-lg">
+							<label><input type="checkbox" value="1" id="saveCheck">  Save Log-In?</label>
 						</div>
 						<br>
 						<div class="input-group">

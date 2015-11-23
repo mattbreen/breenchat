@@ -4,7 +4,7 @@ from twisted.internet import protocol, reactor
 from txws import WebSocketFactory
 
 
-MESSAGE_TYPES = ('login', 'message', 'clear')
+MESSAGE_TYPES = ('login', 'message', 'clear', 'rename')
 PORT = 8081
 
 
@@ -41,6 +41,7 @@ class Chatter(protocol.Protocol):
         self._print(u"ERROR: %s" % message)
         self.reply('error', {'message': message})
 
+    #Called by 'send' in chat.js
     def dataReceived(self, data):
         self._print(u"[%s,%d]  IN: %s" % (self.handle, self.id, data))
         try:
@@ -63,15 +64,17 @@ class Chatter(protocol.Protocol):
 
     def handle_login(self, params):
         self.handle = params['handle']
+        self.avatar = params['avatar']
         self.reply('userlist', {
             'users': [
-                {'id': u.id, 'handle': u.handle}
+                {'id': u.id, 'handle': u.handle, 'avatar': u.avatar}
                 for u in self.factory.chatters
                 if u != self
             ]
         })
         self.broadcast('user_joined', {
             'handle': self.handle,
+            'avatar': self.avatar,
             'id': self.id
         })
 
@@ -79,12 +82,9 @@ class Chatter(protocol.Protocol):
         self.broadcast('clear', {'handle':self.handle,})
 
     def handle_rename(self, params):
-        self.handle = params['handle']
+        self.broadcast('rename', {'handle':self.handle,})
 
-        self.broadcast('user_rename', {
-            'handle': self.handle,
-            'id': self.id
-        })
+        #self.handle = params['handle']
 
     def connectionLost(self, reason):
         params = {
