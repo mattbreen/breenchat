@@ -135,7 +135,7 @@ $(function() {
             }
 			$('#handle').focus();
 			$('#handle-form').submit(function() {
-                if($('#loginPassword').val() == "test"){
+                if($('#loginPassword').val() == "catinthewall94"){
                     $('#handle-dlg').modal('hide');
                     if(checkCookie()){
                         console.log("check");
