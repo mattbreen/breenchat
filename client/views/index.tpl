@@ -8,6 +8,7 @@
 <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/js/chat.js"></script>
 <script type="text/javascript" src="/static/js/jquery.titlealert.js"></script>
+<script type="text/javascript" src="/static/js/snowstorm.js"></script>
 </head>
 <body>
 
