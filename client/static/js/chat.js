@@ -180,6 +180,11 @@ $(function() {
         return false;
     });
 
+    $('#xmas').click(function() {
+        window.chat.message('<img src="http://49.media.tumblr.com/17ff6a4fabad8db518231e57f5e87a58/tumblr_nfgup6F7jX1u4pqbvo1_250.gif" height="200" width="200">');
+        return false;
+    });
+
     $('#temp').click(function() {
         window.chat.message('<p><font size="30">I\'m a faggot.</font>');
         return false;

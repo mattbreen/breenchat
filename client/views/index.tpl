@@ -56,6 +56,9 @@
                 	<ul id="userlist" class="list-group"></ul>
             	</div>
         	</div>
+
+        	<p align="right"><img src="http://image.fg-a.com/christmas/dancing-santa-claus.gif"></p>
+
         	<div class="col-sm-3 col-lg-3">
             	<div id="power-panel" class="panel panel-primary">
             		<div class="panel-heading">
@@ -65,6 +68,7 @@
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="goat">GOAT</button></li>
+                		<li class="list-group-item"><button class="btn btn-default" id="xmas">Ho Ho Ho</button></li>
                 	</ul>
             	</div>
         	</div>
