@@ -52,7 +52,7 @@ ChatServer.prototype = {
     add_user: function(id, handle, avatar) {
         console.log(avatar)
         var color_id = id % this.color_count,
-            $el = $('<li id="user-'+id+'" class="list-group-item user-color-'+color_id+'">' + '<img src="'+ avatar +'" width=40 height=40 ">  ' + handle +'</li>').hide();
+            $el = $('<li id="user-'+id+'" class="list-group-item user-color-'+color_id+'">' + '<img src="'+ avatar +'" width=40 height=40 "> <a href="#">  ' + handle +'</a></li>').hide();
         $('#userlist').append($el);
         $el.fadeIn(500, this.update_count);
     },
@@ -123,11 +123,11 @@ ChatServer.prototype = {
 
 $(function() {
     $('#password-error').hide();
+    $('#otheruser-dlg').hide();
 
 	$('#handle-dlg').modal('show')
 		.on('shown.bs.modal', function() {
             if(!checkCookie()){
-                console.log("checkforst");
                 $('#handle').val(getCookie("username"));
                 $('#loginPassword').val(getCookie("password"));
                 $('#avatar').val(getCookie("avatar"));
@@ -136,13 +136,10 @@ $(function() {
 			$('#handle').focus();
 			$('#handle-form').submit(function() {
                 if($('#loginPassword').val() == "catinthewall94"){
+                    setCookie("username", $('#handle').val(), 30);
+                    setCookie("password", $('#loginPassword').val(), 30);
+                    setCookie("avatar", $('#avatar').val(), 30);
                     $('#handle-dlg').modal('hide');
-                    if(checkCookie()){
-                        console.log("check");
-                        setCookie("username", $('#handle').val(), 30);
-                        setCookie("password", $('#loginPassword').val(), 30);
-                        setCookie("avatar", $('#avatar').val(), 30);
-                    }
                 }else{
                     $('#password-error').show();
                     $('#loginPassword').focus();
@@ -212,7 +209,6 @@ $(function() {
 });
 
 function setCookie(cname, cvalue, exp){
-    console.log("sup");
     var d = new Date();
     d.setTime(d.getTime() + (exp*24*60*60*1000));
     var expires = "expires=" + d.toUTCString();

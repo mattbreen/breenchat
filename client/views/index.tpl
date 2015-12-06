@@ -67,10 +67,10 @@
                 	</div>
                 	<ul class="list-group">
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
-                		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
-                		<li class="list-group-item"><button class="btn btn-default" id="goat">GOAT</button></li>
-                		<li class="list-group-item"><button class="btn btn-default" id="xmas">Ho Ho Ho</button></li>
-                	</ul>
+                		<!-- <li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li> -->
+                		<!-- <li class="list-group-item"><button class="btn btn-default" id="goat">GOAT</button></li> -->
+                		<!-- <li class="list-group-item"><button class="btn btn-default" id="xmas">Ho Ho Ho</button></li> -->
+                	</ul> 
             	</div>
         	</div>
 
@@ -101,9 +101,33 @@
 						</div>
 						<br>
 						<div class="input-group">
-				<span class="input-group-btn">
-					<button class="btn btn-primary btn-lg btn-block">Send It</button>
-				</span>
+							<span class="input-group-btn">
+								<button class="btn btn-primary btn-lg btn-block">Send It</button>
+							</span>
+						</div>
+					</center>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="otheruser-dlg" role="dialog">
+		<div class="modal-dialog" role="dialog">
+		<div class="modal-content">
+				<div class="modal-body">
+					<form id="otheruser-form">
+						<center>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-primary btn-lg btn-block">Vote to Kick</button>
+							</span>
+						</div>
+						<br>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-primary btn-lg btn-block">Mute</button>
+							</span>
 						</div>
 					</center>
 					</form>
