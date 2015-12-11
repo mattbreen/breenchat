@@ -67,7 +67,7 @@
                 	</div>
                 	<ul class="list-group">
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
-                		<!-- <li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li> -->
+                		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
                 		<!-- <li class="list-group-item"><button class="btn btn-default" id="goat">GOAT</button></li> -->
                 		<!-- <li class="list-group-item"><button class="btn btn-default" id="xmas">Ho Ho Ho</button></li> -->
                 	</ul> 
