@@ -101,7 +101,6 @@ ChatServer.prototype = {
             //create hyperlinks
             if(msg.substring(0,4)=="http" || msg.substring(0,3)=="www"){
                 msg = "<a href=\"" + msg + "\" target=\"_blank\">" + msg + "</a>";
-                console.log(msg);
             }
             //var $user = $('<span class="user">').html(user + ': ');
             var $user = $('<span class="user">').html('<img src="'+ avatar +'" width=40 height=40 ">  ');
@@ -131,11 +130,10 @@ $(function() {
                 $('#handle').val(getCookie("username"));
                 $('#loginPassword').val(getCookie("password"));
                 $('#avatar').val(getCookie("avatar"));
-                $('#saveCheck').prop("true");
             }
 			$('#handle').focus();
 			$('#handle-form').submit(function() {
-                if($('#loginPassword').val() == "catinthewall94"){
+                if($('#loginPassword').val() == "catinthewall94" && $('#loginVerify').val() == "all"){
                     setCookie("username", $('#handle').val(), 30);
                     setCookie("password", $('#loginPassword').val(), 30);
                     setCookie("avatar", $('#avatar').val(), 30);
@@ -172,21 +170,6 @@ $(function() {
         return false;
     });
 
-    $('#goat').click(function() {
-        window.chat.message('<img src="http://ak-hdl.buzzfed.com/static/enhanced/webdr03/2013/9/5/10/anigif_enhanced-buzz-17427-1378391009-7.gif" height="200" width="200">');
-        return false;
-    });
-
-    $('#xmas').click(function() {
-        window.chat.message('<img src="http://49.media.tumblr.com/17ff6a4fabad8db518231e57f5e87a58/tumblr_nfgup6F7jX1u4pqbvo1_250.gif" height="200" width="200">');
-        return false;
-    });
-
-    $('#temp').click(function() {
-        window.chat.message('<p><font size="30">I\'m a faggot.</font>');
-        return false;
-    });
-
     $('#clear').click(function() {
         $('#log .message').remove();
         window.chat.send({'type': 'clear'});
@@ -202,7 +185,6 @@ $(function() {
         window.chat.send({'type': 'rename'});
         $('#change-name-dlg').modal('hide');
         $('#chat').focus();
-        window.chat.message('<b><font size="16">I\'m a faggot.</font></b>');
         return false;
     });
 

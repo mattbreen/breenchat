@@ -65,7 +65,6 @@
                 	<ul class="list-group">
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
-                		<li class="list-group-item"><button class="btn btn-default" id="goat">GOAT</button></li>
                 	</ul> 
             	</div>
         	</div>
@@ -89,11 +88,11 @@
 						</div>
 						<br>
 						<div class="input-group input-group-lg">
-							<input type="text" class="form-control" placeholder="Avatar URL" id="avatar" autocomplete="off">
+							<input type="password" class="form-control" placeholder="Number of Sunny Eps" id="loginVerify" autocomplete="off">
 						</div>
 						<br>
 						<div class="input-group input-group-lg">
-							<label><input type="checkbox" value="1" id="saveCheck">  Save Log-In?</label>
+							<input type="text" class="form-control" placeholder="Avatar URL" id="avatar" autocomplete="off">
 						</div>
 						<br>
 						<div class="input-group">
