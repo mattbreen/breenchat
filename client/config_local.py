@@ -1,0 +1,5 @@
+CLIENT_HOST = 'localhost'
+CLIENT_PORT = 8080
+
+CHAT_SERVER = 'localhost'
+CHAT_PORT = 8081

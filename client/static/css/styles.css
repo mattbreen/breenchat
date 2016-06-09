@@ -1,0 +1,67 @@
+F5F5F5
+C3D7DF
+6991AC
+67727A
+D75C37
+
+#chat-panel {
+	display: none;
+}
+
+#handle-dlg .modal-dialog {
+    margin-top: 100px;
+}
+
+#log {
+	height: 400px;
+	overflow-y: auto;
+    font-size: 110%;
+}
+
+.time {
+	color: #bdbdbd;
+    font-size: 75%;
+}
+
+.user {
+	font-weight: bold;
+}
+
+.message-system {
+	font-weight: bold;
+    color: #000000;
+}
+
+#usercount {
+    float: right;
+}
+
+#log {
+    color: #ebebeb;
+    background-color: #ffffff;
+    padding: 8px;
+}
+
+.user-color-0 { /* Orange */
+    color: #DF901B;
+}
+.user-color-1 { /* Purple */
+    color: #D01BB5;
+}
+.user-color-2 { /* Red */
+    color: #BA0D07;
+}
+.user-color-3 { /* Green */
+    color: #5cb85c;
+}
+.user-color-4 { /* Blue */
+    color: #188DB0;
+}
+
+.input-group-addon {
+    background-color: #7E94A9;
+}
+
+.panel{
+    border:0px;
+}
