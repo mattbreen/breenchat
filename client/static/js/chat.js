@@ -35,7 +35,7 @@ ChatServer.prototype = {
                     me.remove_user(message.id);
                     break;
                 case 'clear':
-                    me.log(message.handle + " has cleared their chat. Suspicious.");
+                    me.log(message.handle + " has cleared their chat.");
                     break;
                 case 'userlist':
                     $.each(message.users, function(idx, user) {
