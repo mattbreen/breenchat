@@ -5,6 +5,10 @@ var ChatServer = function(endpoint) {
     this.color_count = 5;
 };
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
 ChatServer.prototype = {
     send: function(params) {
         this.socket.send(JSON.stringify(params));
@@ -14,7 +18,7 @@ ChatServer.prototype = {
         var me = this;
         this.socket = new WebSocket('ws://'+this.endpoint+'/');
         this.socket.onopen = function () {
-            me.log("This chat is fucking anonymous");
+            me.log("What up!","","","","");
             me.send({'type': 'login', 'handle': handle, 'avatar': avatar});
         };
         this.socket.onmessage = function(event) {
@@ -24,18 +28,21 @@ ChatServer.prototype = {
                     me.log(message.message, message.handle, message.avatar, message.id);
                     break;
                 case 'user_joined':
-                    me.log(message.handle + " has joined the chat");
+                    me.log(message.handle + " has joined the chat", message.handle, message.avatar, message.id, "Joined");
                     me.add_user(message.id, message.handle, message.avatar);
                     break;
                 case 'rename':
-                    me.log(message.handle + " changed their name.");
+                    me.log(message.handle + " changed their name.", message.handle, message.avatar, message.id, "Ignore");
                     break;
                 case 'user_left':
-                    me.log(message.handle + " has left the chat");
+                    me.log(message.handle + " has left the chat", message.handle, message.avatar, message.id, "Left");
                     me.remove_user(message.id);
                     break;
                 case 'clear':
-                    me.log(message.handle + " has cleared their chat.");
+                    me.log(message.handle + " has cleared their chat.", message.handle, message.avatar, message.id, "Ignore");
+                    break;
+                case 'news':
+                    me.log(message.handle + " has news!", message.handle, message.avatar, message.id, "News");
                     break;
                 case 'userlist':
                     $.each(message.users, function(idx, user) {
@@ -45,12 +52,11 @@ ChatServer.prototype = {
             }
         };
         this.socket.onclose = function () {
-            me.log("Chat connection closed");
+            me.log("Chat connection closed","","","","Ignore");
         };
     },
 
     add_user: function(id, handle, avatar) {
-        console.log(avatar)
         var color_id = id % this.color_count,
             $el = $('<li id="user-'+id+'" class="list-group-item user-color-'+color_id+'">' + '<img src="'+ avatar +'" width=40 height=40 "> <a href="#">  ' + handle +'</a></li>').hide();
         $('#userlist').append($el);
@@ -81,11 +87,11 @@ ChatServer.prototype = {
             ampm = hrs >= 12 ? 'pm' : 'am';
         hrs = hrs % 12;
         hrs = hrs ? hrs : 12;
-        return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ampm;
+        return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ampm + " ";
     },
 
-    log: function(msg, user, avatar, id) {
-        var system = user == undefined,
+    log: function(msg, user, avatar, id, msgType) {
+        var system = msgType != undefined,
             color_id = id % this.color_count,
             $ts = $('<span class="time">').html(this.timestamp()),
             $message = $('<div class="message">').append($ts),
@@ -110,18 +116,40 @@ ChatServer.prototype = {
         $('#log').scrollTop($('#log')[0].scrollHeight);
 
         //Browser Tab Notifications
-        $.titleAlert(system ? "A New Guy!" : (user + " said something"), {
-            requireBlur:true,
-            stopOnFocus:true,
-            duration:0,
-            interval:500
-        });
+        var mess = msgType;
+        switch(msgType){
+            case 'Ignore':
+                mess = "Ignore";
+                break;
+            case 'Joined':
+                mess = (user + " joined");
+                break;
+            case 'Left':
+                mess = (user + " left");
+                break;
+            case 'News':
+                mess = (user + "\'s got news!!");
+                break;
+            default:
+                mess = (user + " said something");
+        }
+        if(mess != 'Ignore'){
+            $.titleAlert(mess, {
+                requireBlur:true,
+                stopOnFocus:true,
+                duration:0,
+                interval:500
+            });
+        }
+        
     }
 };
 
 $(function() {
     $('#password-error').hide();
     $('#otheruser-dlg').hide();
+
+    $('#news-pop').hide();
 
 	$('#handle-dlg').modal('show')
 		.on('shown.bs.modal', function() {
@@ -172,6 +200,22 @@ $(function() {
     $('#clear').click(function() {
         $('#log .message').remove();
         window.chat.send({'type': 'clear'});
+        return false;
+    });
+
+    $('#jt').click(function() {
+        window.chat.message('<img src="http://trendom.co/wp-content/uploads/2015/09/justin-timberlake-young-1364982486-view-0.jpg" height="300" width="190">');
+        return false;
+    });
+
+    $('#news').click(function() {
+        $('#news-pop').show();
+        window.chat.send({'type': 'news'});
+        return false;
+    });
+
+    $('#news-hide').click(function() {
+        $('#news-pop').hide();
         return false;
     });
 

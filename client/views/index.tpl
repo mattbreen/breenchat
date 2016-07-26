@@ -39,6 +39,15 @@
     		<div class="col-sm-9 col-lg-9">
                 <div id="log"></div>
                 <form id="chatform">
+                	<div class="alert alert-danger alert-dismissible fade in" role="alert" id="news-pop">
+                		<center>
+                		<h2>Someone has news!</h2>
+                		<p>
+                			<button type="button" class="btn btn-danger" id="news-hide">Alright</button>
+                		</p>
+                	</center>
+                	</div>
+
                     <div class="input-group">
                         <input id="chat" type="text" class="form-control input-lg" autocomplete="off" />
                         <span class="input-group-btn">
@@ -63,8 +72,12 @@
                 		Functions <span id="usercount" class="badge"></span>
                 	</div>
                 	<ul class="list-group">
+                		<center>
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
+                		<li class="list-group-item"><button class="btn btn-default" id="jt">JT</button></li>
+                		<li class="list-group-item"><button class="btn btn-danger" id="news" data-toggle="tooltip" data-placement="right" title="Got News?">NEWS</button></li>
+                		</center>
                 	</ul> 
             	</div>
         	</div>

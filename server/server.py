@@ -4,7 +4,7 @@ from twisted.internet import protocol, reactor
 from txws import WebSocketFactory
 
 
-MESSAGE_TYPES = ('login', 'message', 'clear', 'rename')
+MESSAGE_TYPES = ('login', 'message', 'clear', 'rename', 'news')
 PORT = 8081
 
 
@@ -52,6 +52,7 @@ class Chatter(protocol.Protocol):
         type_ = json_data.get('type')
         if not type_ or type_ not in MESSAGE_TYPES:
             self.error('Invalid message type')
+            
         getattr(self, 'handle_%s' % type_)(json_data)
 
     def handle_message(self, params):
@@ -80,6 +81,9 @@ class Chatter(protocol.Protocol):
 
     def handle_clear(self, params):
         self.broadcast('clear', {'handle':self.handle,})
+
+    def handle_news(self, params):
+        self.broadcast('news', {'handle':self.handle,})
 
     def handle_rename(self, params):
         self.broadcast('rename', {'handle':self.handle,})
