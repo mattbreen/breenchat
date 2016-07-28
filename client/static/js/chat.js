@@ -52,7 +52,7 @@ ChatServer.prototype = {
             }
         };
         this.socket.onclose = function () {
-            me.log("Chat connection closed","","","","Ignore");
+            me.log("Chat connection closed.",message.handle,"","","Disconnected");
         };
     },
 
@@ -119,7 +119,10 @@ ChatServer.prototype = {
         var mess = msgType;
         switch(msgType){
             case 'Ignore':
-                mess = "Ignore";
+                mess = "";
+                break;
+            case 'Disconnected':
+                mess = (user + " lost connection");
                 break;
             case 'Joined':
                 mess = (user + " joined");
@@ -148,6 +151,7 @@ ChatServer.prototype = {
 $(function() {
     $('#password-error').hide();
     $('#otheruser-dlg').hide();
+    $('#alert-banner').hide();
 
     $('#news-pop').hide();
 

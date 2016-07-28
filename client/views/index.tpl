@@ -33,10 +33,12 @@
 	  </div>
 	</div>
 
-	<div class="alert alert-danger alert-dismissible" role="alert">
-  	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  	<strong>Maintenance Notice.</strong> Breenchat will be down for scheduled maintenance beginning at 12:00pm EST. Expected to be back online at 12:30pm EST. Thank you for your patience.
+	<!-- TOP BANNER FOR SITE MESSAGES -->
+	<div class="alert alert-danger alert-dismissible" role="alert" id="alert-banner">
+  		<!--<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+  		<strong>Maintenance Notice.</strong> Breenchat will be down for scheduled maintenance beginning at 12:00pm EST. Expected to be back online at 12:30pm EST. Thank you for your patience.
 	</div>
+
 
 	<div id="chat-panel">
 
