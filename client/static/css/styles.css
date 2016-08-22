@@ -57,6 +57,15 @@ D75C37
 .user-color-4 { /* Blue */
     color: #188DB0;
 }
+.user-color-5 { /* Grey */
+    color: #444144;
+}
+.user-color-6 { /* Dark Blue */
+    color: #00276F;
+}
+.user-color-7 { /* Barf */
+    color: #6F6F00;
+}
 
 .input-group-addon {
     background-color: #7E94A9;

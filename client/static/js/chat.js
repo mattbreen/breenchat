@@ -2,7 +2,7 @@ var ChatServer = function(endpoint) {
     this.endpoint = endpoint;
     this.socket = undefined;
 
-    this.color_count = 5;
+    this.color_count = 8;
 };
 
 $(function () {
@@ -151,7 +151,7 @@ ChatServer.prototype = {
 $(function() {
     $('#password-error').hide();
     $('#otheruser-dlg').hide();
-    $('#alert-banner').hide();
+    //$('#alert-banner').hide();
 
     $('#news-pop').hide();
 
