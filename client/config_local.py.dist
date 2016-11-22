@@ -2,4 +2,4 @@ CLIENT_HOST = 'localhost'
 CLIENT_PORT = 8000
 
 CHAT_SERVER = 'localhost'
-CHAT_PORT = 8080
+CHAT_PORT = 8081
