@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+<link rel="shortcut icon" type="image/png" href="/static/img/favicon-32x32.png"/>
 <title>BreenChat</title>
 <script src="/static/js/snowstorm.js"></script>
 <link href="/static/css/bootstrap.css" rel="stylesheet">
@@ -84,6 +85,7 @@
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="jt">JT</button></li>
+                		<li class="list-group-item"><button class="btn btn-default" id="bastard">Bastard Santa</button></li>
                 		<li class="list-group-item"><button class="btn btn-danger" id="news" data-toggle="tooltip" data-placement="right" title="Got News?">NEWS</button></li>
                 		</center>
                 	</ul> 

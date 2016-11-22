@@ -212,6 +212,11 @@ $(function() {
         return false;
     });
 
+    $('#bastard').click(function() {
+        window.chat.message('<marquee scrollamount="26"><img src="http://bestanimations.com/Holidays/Christmas/santa/funny-santa-claus-gif-3.gif"></marquee>');
+        return false;
+    });
+
     $('#news').click(function() {
         $('#news-pop').show();
         window.chat.send({'type': 'news'});
