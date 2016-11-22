@@ -29,7 +29,8 @@ D75C37
 
 .message-system {
 	font-weight: bold;
-    color: #000000;
+    font-size: 130%;
+    color: #BD1041;
 }
 
 #usercount {
@@ -63,8 +64,8 @@ D75C37
 .user-color-6 { /* Dark Blue */
     color: #00276F;
 }
-.user-color-7 { /* Barf */
-    color: #6F6F00;
+.user-color-7 { /* Black */
+    color: #000000;
 }
 
 .input-group-addon {

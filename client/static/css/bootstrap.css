@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=af649d79f12896bc02ad80d16208403c)
- * Config saved to config.json and https://gist.github.com/af649d79f12896bc02ad80d16208403c
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=f72ea3135c482e7f07ace61d0554ebaf)
+ * Config saved to config.json and https://gist.github.com/f72ea3135c482e7f07ace61d0554ebaf
  */
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -2562,7 +2562,7 @@ output {
   color: #555555;
   background-color: #ffffff;
   background-image: none;
-  border: 1px solid #6991ac;
+  border: 1px solid #8c1934;
   border-radius: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -2571,10 +2571,10 @@ output {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 .form-control:focus {
-  border-color: #66afe9;
+  border-color: #be1142;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(190, 17, 66, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(190, 17, 66, 0.6);
 }
 .form-control::-moz-placeholder {
   color: #999999;
@@ -3909,7 +3909,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #555555;
   text-align: center;
   background-color: #eeeeee;
-  border: 1px solid #6991ac;
+  border: 1px solid #8c1934;
   border-radius: 0;
 }
 .input-group-addon.input-sm {
