@@ -4,6 +4,9 @@
 /bin/
 /include/
 /lib/
+/scripts/
+/tcl/
+/pip-selfcheck.json
 .DS_Store
 .Python
 client/config_local.py

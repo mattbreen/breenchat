@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>BreenChat</title>
+<script src="/static/js/snowstorm.js"></script>
 <link href="/static/css/bootstrap.css" rel="stylesheet">
 <link href="/static/css/styles.css" rel="stylesheet">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
