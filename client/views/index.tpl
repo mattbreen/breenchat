@@ -39,7 +39,7 @@
 	<!-- success, info, warning, dander -->
 	<div class="alert alert-info alert-dismissible" role="alert" id="alert-banner">
   		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  		<strong>Notice  </strong> Winter Theme. That's pretty neat.
+  		<strong>Notice  :  </strong> Winter Theme. That's pretty neat.
 	</div>
 
 
