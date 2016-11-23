@@ -151,7 +151,7 @@ ChatServer.prototype = {
 $(function() {
     $('#password-error').hide();
     $('#otheruser-dlg').hide();
-    $('#alert-banner').hide();
+    //$('#alert-banner').hide();
 
     $('#news-pop').hide();
 
