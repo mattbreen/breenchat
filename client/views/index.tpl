@@ -77,8 +77,6 @@
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="jt">JT</button></li>
-                		<li class="list-group-item"><button class="btn btn-default" id="bastard">Bastard Santa</button></li>
-                		<li class="list-group-item"><button class="btn btn-default" id="wentz">Wentz</button></li>
                 		<li class="list-group-item"><button class="btn btn-danger" id="news" data-toggle="tooltip" data-placement="right" title="Got News?">NEWS</button></li>
                 		</center>
                 	</ul> 

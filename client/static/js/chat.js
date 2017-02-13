@@ -151,7 +151,7 @@ ChatServer.prototype = {
 $(function() {
     $('#password-error').hide();
     $('#otheruser-dlg').hide();
-    //$('#alert-banner').hide();
+    $('#alert-banner').hide();
 
     $('#news-pop').hide();
 
@@ -209,16 +209,6 @@ $(function() {
 
     $('#jt').click(function() {
         window.chat.message('<img src="http://trendom.co/wp-content/uploads/2015/09/justin-timberlake-young-1364982486-view-0.jpg" height="300" width="190">');
-        return false;
-    });
-
-    $('#wentz').click(function() {
-        window.chat.message('<img src="http://media.graytvinc.com/images/226*310/Wentz2.jpg">');
-        return false;
-    });
-
-    $('#bastard').click(function() {
-        window.chat.message('<marquee scrollamount="26"><img src="http://bestanimations.com/Holidays/Christmas/santa/funny-santa-claus-gif-3.gif"></marquee>');
         return false;
     });
 
