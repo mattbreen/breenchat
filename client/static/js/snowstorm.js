@@ -26,7 +26,7 @@ var snowStorm = (function(window, document) {
   this.flakeBottom = null;        // Integer for Y axis snow limit, 0 or null for "full-screen" snow effect
   this.followMouse = true;        // Snow movement can respond to the user's mouse
   this.snowColor = '#E11A52';        // Don't eat (or use?) yellow snow.
-  this.snowCharacter = '&hearts;';  // &bull; = bullet, &middot; is square on some systems etc.
+  this.snowCharacter = '&clubs;';  // &bull; = bullet, &middot; is square on some systems etc.
   this.snowStick = false;          // Whether or not snow should "stick" at the bottom. When off, will never collect.
   this.targetElement = null;      // element which snow will be appended to (null = document.body) - can be an element ID eg. 'myDiv', or a DOM node reference
   this.useMeltEffect = true;      // When recycling fallen snow (or rarely, when falling), have it "melt" and fade out if browser supports it
