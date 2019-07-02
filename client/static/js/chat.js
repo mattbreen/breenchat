@@ -41,8 +41,9 @@ ChatServer.prototype = {
                 case 'clear':
                     me.log(message.handle + " has cleared their chat.", message.handle, message.avatar, message.id, "Ignore");
                     break;
-                case 'news':
-                    me.log(message.handle + " has news!", message.handle, message.avatar, message.id, "News");
+                case 'trivia':
+                    me.log(message.handle + " has trivia!", message.handle, message.avatar, message.id, "Trivia");
+                    me.log(get_trivia(), message.handle, message.avatar, message.id, "Trivia");
                     break;
                 case 'userlist':
                     $.each(message.users, function(idx, user) {
@@ -89,6 +90,10 @@ ChatServer.prototype = {
         hrs = hrs ? hrs : 12;
         return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ampm + " ";
     },
+    
+    get_trivia: function() {
+        return ($.get('https://opentdb.com/api.php?amount=1&encode=url3986', function(data) { data[0].question }));
+    },
 
     log: function(msg, user, avatar, id, msgType) {
         var system = msgType != undefined,
@@ -130,8 +135,8 @@ ChatServer.prototype = {
             case 'Left':
                 mess = (user + " left");
                 break;
-            case 'News':
-                mess = (user + "\'s got news!!");
+            case 'Trivia':
+                mess = (user + "\'s got trivia!");
                 break;
             default:
                 mess = (user + " said something");
@@ -212,8 +217,8 @@ $(function() {
         return false;
     });
 
-    $('#news').click(function() {
-        window.chat.send({'type': 'news'});
+    $('#trivia').click(function() {
+        window.chat.send({'type': 'trivia'});
         return false;
     });
 

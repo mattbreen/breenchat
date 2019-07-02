@@ -3,7 +3,7 @@
 <head>
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon-32x32.png"/>
 <title>BreenChat</title>
-<script src="/static/js/snowstorm.js"></script>
+<!--<script src="/static/js/snowstorm.js"></script>-->
 <link href="/static/css/bootstrap.css" rel="stylesheet">
 <link href="/static/css/styles.css" rel="stylesheet">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -77,7 +77,7 @@
                 		<li class="list-group-item"><button class="btn btn-default" id="clear">Clear</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="cats">Cats</button></li>
                 		<li class="list-group-item"><button class="btn btn-default" id="jt">JT</button></li>
-                		<li class="list-group-item"><button class="btn btn-danger" id="news" data-toggle="tooltip" data-placement="right" title="Got News?">NEWS</button></li>
+                		<li class="list-group-item"><button class="btn btn-default" id="trivia">Trivia</button></li>
                 		</center>
                 	</ul> 
             	</div>
