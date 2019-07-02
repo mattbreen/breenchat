@@ -2,7 +2,7 @@
 BreenChat
 =========
 
-http://chat.danbreen.net
+http://mattbreen.net
 
 BreenChat is a simple, web-based chat server and client running on WebSockets_
 and Twisted_. It was created as a proof of concept just playing around with
