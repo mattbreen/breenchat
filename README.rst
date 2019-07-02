@@ -2,7 +2,7 @@
 BreenChat
 =========
 
-http://chat.danbreen.net
+http://mattbreen.net
 
 BreenChat is a simple, web-based chat server and client running on WebSockets_
 and Twisted_. It was created as a proof of concept just playing around with
@@ -19,7 +19,7 @@ It's recommended to use a virtual environment to separate dependencies:
 
 ::
 
-    git clone https://github.com/dbreen/breenchat.git
+    git clone https://github.com/mbreen/breenchat.git
     cd breenchat
     virtualenv --no-site-packages .
 
@@ -41,7 +41,7 @@ To configure: ::
 
 The server and port should point to the Twisted reactor running for the server, and that's what the client WebSocket will connect on. E.g.: ::
 
-    CHAT_SERVER = 'chat.danbreen.net'
+    CHAT_SERVER = 'mattbreen.net'
     CHAT_PORT = 8080
 
 Running it locally
