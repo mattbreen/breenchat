@@ -33,6 +33,12 @@ D75C37
     color: #BD1041;
 }
 
+.message-trivia {
+    font-weight: bold;
+    font-size: 100%;
+    color: #10bd8c;
+}
+
 #usercount {
     float: right;
 }

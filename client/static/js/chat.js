@@ -17,10 +17,12 @@ ChatServer.prototype = {
     login: function(handle, avatar) {
         var me = this;
         this.socket = new WebSocket('ws://'+this.endpoint+'/');
+        //ON LOGIN MESSAGE
         this.socket.onopen = function () {
             me.log("What up!","","","","");
             me.send({'type': 'login', 'handle': handle, 'avatar': avatar});
         };
+        //HANDLE MESSAGE TYPE
         this.socket.onmessage = function(event) {
             message = $.parseJSON(event.data);
             switch(message.type) {
@@ -42,8 +44,9 @@ ChatServer.prototype = {
                     me.log(message.handle + " has cleared their chat.", message.handle, message.avatar, message.id, "Ignore");
                     break;
                 case 'trivia':
-                    me.log(message.handle + " has trivia!", message.handle, message.avatar, message.id, "Trivia");
-                    me.log(get_trivia(), message.handle, message.avatar, message.id, "Trivia");
+                    me.log(message.handle + " has trivia!", message.handle, message.avatar, message.id, "Has_Trivia");
+                    //Ask the trivia question
+                    me.log(message.trivia, message.handle, message.avatar, message.id, "Trivia");
                     break;
                 case 'userlist':
                     $.each(message.users, function(idx, user) {
@@ -52,6 +55,7 @@ ChatServer.prototype = {
                     break;
             }
         };
+        //ON LOGOUT MESSAGE
         this.socket.onclose = function () {
             me.log("Chat connection closed.",message.handle,"","","Disconnected");
         };
@@ -90,10 +94,6 @@ ChatServer.prototype = {
         hrs = hrs ? hrs : 12;
         return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ampm + " ";
     },
-    
-    get_trivia: function() {
-        return ($.get('https://opentdb.com/api.php?amount=1&encode=url3986', function(data) { data[0].question }));
-    },
 
     log: function(msg, user, avatar, id, msgType) {
         var system = msgType != undefined,
@@ -101,9 +101,16 @@ ChatServer.prototype = {
             $ts = $('<span class="time">').html(this.timestamp()),
             $message = $('<div class="message">').append($ts),
             $content = $('<span>');
-        if(system) {
+        
+        //TRIVIA QUESTIONS
+        if (msgType == 'Trivia') {
+            $message.addClass('message-trivia');
+            $content.html(msg);
+        //SYSTEM MESSAGES
+        } else if (system) {
             $message.addClass('message-system');
             $content.html(msg);
+        //USER MESSAGES
         } else {
             //eventually have text checking function to verify valid content
             if(msg==""){

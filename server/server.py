@@ -1,11 +1,14 @@
 import json
 import sys
+import requests
 from twisted.internet import protocol, reactor
 from txws import WebSocketFactory
 
 
 MESSAGE_TYPES = ('login', 'message', 'clear', 'rename', 'trivia')
 PORT = 8081
+
+CHAT_MODE = ('CHAT', 'TRIVIA')
 
 
 class Chatter(protocol.Protocol):
@@ -83,7 +86,14 @@ class Chatter(protocol.Protocol):
         self.broadcast('clear', {'handle':self.handle,})
 
     def handle_trivia(self, params):
-        self.broadcast('trivia', {'handle':self.handle,})
+        response = requests.get('https://opentdb.com/api.php?amount=1')
+        if(response.status_code == 200):
+            data = response.json()
+            results = data['results']
+            question = results[0]
+            q_text = question['question']
+            self._print(q_text)
+            self.broadcast('trivia', {'handle':self.handle, 'trivia':q_text})
 
     def handle_rename(self, params):
         self.broadcast('rename', {'handle':self.handle,})
@@ -109,6 +119,7 @@ class ChatterFactory(protocol.Factory):
         self.chatters.append(chatter)
         return chatter
 
+    #SENDS MESSAGE TO CHAT CLIENT -- called by any self.broadcast call
     def broadcast(self, message):
         for chatter in self.chatters:
             chatter._write(message)
