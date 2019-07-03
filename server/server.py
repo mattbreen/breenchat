@@ -86,7 +86,7 @@ class Chatter(protocol.Protocol):
         self.broadcast('clear', {'handle':self.handle,})
 
     def handle_trivia(self, params):
-        response = requests.get('https://opentdb.com/api.php?amount=1')
+        response = requests.get('https://opentdb.com/api.php?amount=1', verify=False)
         if(response.status_code == 200):
             data = response.json()
             results = data['results']
