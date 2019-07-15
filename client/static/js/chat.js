@@ -220,7 +220,7 @@ $(function() {
     });
 
     $('#jt').click(function() {
-        window.chat.message('<img src="http://trendom.co/wp-content/uploads/2015/09/justin-timberlake-young-1364982486-view-0.jpg" height="300" width="190">');
+        window.chat.message('<img src="https://s.blogcdn.com/www.stylelist.com/media/2013/03/justin-timberlake-hair-2-1363298081.jpg" height="268" width="169">');
         return false;
     });
 
