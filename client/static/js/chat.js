@@ -44,7 +44,7 @@ ChatServer.prototype = {
                     me.log(message.handle + " has cleared their chat.", message.handle, message.avatar, message.id, "Ignore");
                     break;
                 case 'trivia':
-                    me.log(message.handle + " has trivia!", message.handle, message.avatar, message.id, "Has_Trivia");
+                    //me.log(message.handle + " has trivia!", message.handle, message.avatar, message.id, "Has_Trivia");
                     //Ask the trivia question
                     me.log(message.trivia, message.handle, message.avatar, message.id, "Trivia");
                     break;

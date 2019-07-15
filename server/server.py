@@ -92,8 +92,14 @@ class Chatter(protocol.Protocol):
             results = data['results']
             question = results[0]
             q_text = question['question']
-            self._print(q_text)
+            q_answ = question['correct_answer'].encode('utf-8')
+            q_incor = question['incorrect_answers']
+            temp = [s.encode('utf-8') for s in q_incor]
+            temp = ", ".join(temp)
+            temp = temp + ", " + q_answ
+            #temp = q_answ.encode('utf-8') + q_incor.encode('utf-8')
             self.broadcast('trivia', {'handle':self.handle, 'trivia':q_text})
+            self.broadcast('trivia', {'handle':self.handle, 'trivia':temp})
 
     def handle_rename(self, params):
         self.broadcast('rename', {'handle':self.handle,})
