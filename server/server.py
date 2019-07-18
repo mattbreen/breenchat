@@ -3,12 +3,13 @@ import sys
 import requests
 from twisted.internet import protocol, reactor
 from txws import WebSocketFactory
+from random import shuffle
 
 
 MESSAGE_TYPES = ('login', 'message', 'clear', 'rename', 'trivia')
 PORT = 8081
 
-CHAT_MODE = ('CHAT', 'TRIVIA')
+#CHAT_MODE = ('CHAT', 'TRIVIA')
 
 
 class Chatter(protocol.Protocol):
@@ -31,7 +32,7 @@ class Chatter(protocol.Protocol):
         sys.stdout.flush()
 
     def _write(self, message):
-        self._print(u"[%s,%d] OUT: %s" % (self.handle, self.id, message))
+        #self._print(u"[%s,%d] OUT: %s" % (self.handle, self.id, message))
         self.transport.write(message)
 
     def reply(self, type_, params):
@@ -46,7 +47,7 @@ class Chatter(protocol.Protocol):
 
     #Called by 'send' in chat.js
     def dataReceived(self, data):
-        self._print(u"[%s,%d]  IN: %s" % (self.handle, self.id, data))
+        #self._print(u"[%s,%d]  IN: %s" % (self.handle, self.id, data))
         try:
             json_data = json.loads(data)
         except ValueError:
@@ -86,20 +87,26 @@ class Chatter(protocol.Protocol):
         self.broadcast('clear', {'handle':self.handle,})
 
     def handle_trivia(self, params):
+        #Get 1 random trivia from opentdb, can eventually narrow by category and difficulty
         response = requests.get('https://opentdb.com/api.php?amount=1', verify=False)
         if(response.status_code == 200):
+            #TODO: cleanup into 1 statement now that you know how to parse the response
             data = response.json()
             results = data['results']
             question = results[0]
-            q_text = question['question']
+            #Question, Correct Answer, Incorrect Answers
+            q_text = question['question'].encode('utf-8')
             q_answ = question['correct_answer'].encode('utf-8')
             q_incor = question['incorrect_answers']
-            temp = [s.encode('utf-8') for s in q_incor]
-            temp = ", ".join(temp)
-            temp = temp + ", " + q_answ
-            #temp = q_answ.encode('utf-8') + q_incor.encode('utf-8')
-            self.broadcast('trivia', {'handle':self.handle, 'trivia':q_text})
-            self.broadcast('trivia', {'handle':self.handle, 'trivia':temp})
+            answers = [s.encode('utf-8') for s in q_incor] #type = list
+            #Create list of randomized answers
+            answers.append(q_answ)
+            shuffle(answers)
+            answers = ", ".join(answers) #type = str
+            self.broadcast('trivia', {'handle':self.handle, 'trivia':q_text}) #TODO: make 1 broadcast, question and answers on 1 line
+            self.broadcast('trivia', {'handle':self.handle, 'trivia':answers})
+        else:
+            self.broadcast('trivia_error', {'handle':self.handle})
 
     def handle_rename(self, params):
         self.broadcast('rename', {'handle':self.handle,})
