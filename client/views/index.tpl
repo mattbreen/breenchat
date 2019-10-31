@@ -3,7 +3,7 @@
 <head>
 <link rel="shortcut icon" type="image/png" href="/static/img/favicon-32x32.png"/>
 <title>BreenChat</title>
-<!--<script src="/static/js/snowstorm.js"></script>-->
+<script src="/static/js/snowstorm.js"></script>
 <link href="/static/css/bootstrap.css" rel="stylesheet">
 <link href="/static/css/styles.css" rel="stylesheet">
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -102,7 +102,7 @@
 						</div>
 						<br>
 						<div class="input-group input-group-lg">
-							<input type="text" class="form-control" placeholder="Avatar URL" id="avatar" autocomplete="off">
+							<input type="text" class="form-control" placeholder="Avatar URL (optional)" id="avatar" autocomplete="off">
 						</div>
 						<br>
 						<div class="input-group">

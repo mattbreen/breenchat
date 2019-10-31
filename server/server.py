@@ -1,9 +1,12 @@
 import json
 import sys
 import requests
+import timeit
 from twisted.internet import protocol, reactor
 from txws import WebSocketFactory
 from random import shuffle
+from threading import Timer
+from time import sleep
 
 
 MESSAGE_TYPES = ('login', 'message', 'clear', 'rename', 'trivia')
@@ -105,8 +108,14 @@ class Chatter(protocol.Protocol):
             answers = ", ".join(answers) #type = str
             self.broadcast('trivia', {'handle':self.handle, 'trivia':q_text}) #TODO: make 1 broadcast, question and answers on 1 line
             self.broadcast('trivia', {'handle':self.handle, 'trivia':answers})
+            #self.trivia_timer(self)
         else:
             self.broadcast('trivia_error', {'handle':self.handle})
+
+    def trivia_timer(self, params):
+        def sendit(*args, **kwargs):
+            self.broadcast('trivia_timer', {'handle':self.handle,})
+        timeit.Timer(20, sendit(self, params), ["bb"]).start()
 
     def handle_rename(self, params):
         self.broadcast('rename', {'handle':self.handle,})
@@ -139,7 +148,6 @@ class ChatterFactory(protocol.Factory):
 
     def remove(self, chatter):
         self.chatters.remove(chatter)
-
 
 print "Starting reactor..."
 reactor.listenTCP(PORT, WebSocketFactory(ChatterFactory()))

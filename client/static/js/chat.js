@@ -45,6 +45,10 @@ ChatServer.prototype = {
                     break;
                 case 'trivia':
                     me.log(message.trivia, message.handle, message.avatar, message.id, "Trivia");
+                    me.trivia_timer(true);
+                    break;
+                case 'trivia_timer':
+                    me.trivia_timer(false);
                     break;
                 case 'trivia_error':
                     me.log("There was a problem trying to load trivia.", message.handle, message.avatar, message.id);
@@ -94,6 +98,14 @@ ChatServer.prototype = {
         hrs = hrs % 12;
         hrs = hrs ? hrs : 12;
         return (hrs < 10 ? "0" : "") + hrs + ":" + (mins < 10 ? "0" : "") + mins + ampm + " ";
+    },
+
+    //When trivia starts, disable the button so more questions can't be asked, when trivia ends re-enable button
+    trivia_timer: function(t) {
+        if (t)
+            $('#trivia').attr('disabled','disabled');
+        else
+            $('#trivia').removeAttr('disabled');
     },
 
     log: function(msg, user, avatar, id, msgType) {
